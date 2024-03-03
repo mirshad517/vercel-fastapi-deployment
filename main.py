@@ -130,3 +130,138 @@ async def get_football_stream(id:str):
         return response.json()
     except requests.RequestException as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch football stream: {e}")
+
+
+
+
+@app.post("/api/v1/music/search",tags=['Song'])
+async def get_data(search:str):
+        url = "https://jio-saavan-unofficial.p.rapidapi.com/getdata"
+        querystring = {"q": search}
+        headers = {
+            "X-RapidAPI-Key": "4c611e7488mshadd6a1b53609893p132b90jsn7af42493986c",
+            "X-RapidAPI-Host": "jio-saavan-unofficial.p.rapidapi.com"
+        }
+
+        response = requests.get(url, headers=headers, params=querystring)
+
+        if response.status_code == 200:
+            return response.json()
+        else:
+            raise HTTPException(status_code=response.status_code, detail="Failed to fetch data")
+
+
+@app.post("/api/v1/song/link",tags=['Song'])
+async def get_song(link:str):
+    url = "https://jio-saavan-unofficial.p.rapidapi.com/getsong"
+    payload = {
+        "encrypted_media_url": link
+    }
+    headers = {
+        "content-type": "application/json",
+        "X-RapidAPI-Key": "4c611e7488mshadd6a1b53609893p132b90jsn7af42493986c",
+        "X-RapidAPI-Host": "jio-saavan-unofficial.p.rapidapi.com"
+    }
+
+    response = requests.post(url, json=payload, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise HTTPException(status_code=response.status_code, detail="Failed to fetch song")
+
+
+
+@app.post("/api/v1/book", tags=['Books'])
+async def get_books_info(required_param: str):
+    url = "https://getbooksinfo.p.rapidapi.com/"
+    querystring = {"s": required_param}
+    headers = {
+        "X-RapidAPI-Key": "4c611e7488mshadd6a1b53609893p132b90jsn7af42493986c",
+        "X-RapidAPI-Host": "getbooksinfo.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers, params=querystring)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise HTTPException(status_code=response.status_code, detail="Failed to fetch book info")
+
+
+
+@app.post("/api/v1/phone_validate", tags=['Phone'])
+async def phone_validate(number: str, country_code: str):
+    url = "https://neutrinoapi-phone-validate.p.rapidapi.com/phone-validate"
+    payload = {
+        "number": number,
+        "country-code": country_code
+    }
+    headers = {
+        "content-type": "application/x-www-form-urlencoded",
+        "X-RapidAPI-Key": "4c611e7488mshadd6a1b53609893p132b90jsn7af42493986c",
+        "X-RapidAPI-Host": "neutrinoapi-phone-validate.p.rapidapi.com"
+    }
+
+    response = requests.post(url, data=payload, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise HTTPException(status_code=response.status_code, detail="Failed to validate phone number")
+
+
+
+@app.get("/api/v1/get_temp_email",tags=['Email'])
+async def get_temp_email():
+    url = "https://temp-mail44.p.rapidapi.com/api/v3/email/new"
+    payload = {
+        "key1": "value",
+        "key2": "value"
+    }
+    headers = {
+        "content-type": "application/json",
+        "X-RapidAPI-Key": "4c611e7488mshadd6a1b53609893p132b90jsn7af42493986c",
+        "X-RapidAPI-Host": "temp-mail44.p.rapidapi.com"
+    }
+
+    response = requests.post(url, json=payload, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise HTTPException(status_code=response.status_code, detail="Failed to fetch temporary email")
+
+
+
+@app.post("/api/v1/get_temp_email_messages",tags=['Email'])
+async def get_temp_email_messages(email: str):
+    url = f"https://temp-mail44.p.rapidapi.com/api/v3/email/{email}/messages"
+    headers = {
+        "X-RapidAPI-Key": "4c611e7488mshadd6a1b53609893p132b90jsn7af42493986c",
+        "X-RapidAPI-Host": "temp-mail44.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise HTTPException(status_code=response.status_code, detail="Failed to fetch temporary email messages")
+
+
+
+@app.post("/api/v1/get_whatsapp_data",tags=["Whatsapp"])
+async def get_whatsapp_data(phone_number: str):
+    url = f"https://whatsapp-data1.p.rapidapi.com/number/{phone_number}"
+    headers = {
+        "X-RapidAPI-Key": "4c611e7488mshadd6a1b53609893p132b90jsn7af42493986c",
+        "X-RapidAPI-Host": "whatsapp-data1.p.rapidapi.com"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise HTTPException(status_code=response.status_code, detail="Failed to fetch WhatsApp data")
