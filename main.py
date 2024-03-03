@@ -25,7 +25,7 @@ html = f"""
             <li><a href="/docs" class="text-blue-500">/docs (apis)</a></li>
             <li><a href="/redoc" class="text-blue-500">/redoc (apis)</a></li>
         </ul>
-        <p>Powered by <a href="https://vercel.com" target="_blank" class="text-blue-500">Vercel</a></p>
+        <p>Powered by <a href="https://mirshadkvr.xyz" target="_blank" class="text-blue-500">Vercel</a></p>
     </div>
 </body>
 </html>
