@@ -112,7 +112,7 @@ async def get_football_live_stream():
     try:
         response = requests.get(url, headers=headers)
         response.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
-        return {"Status":"200"."data":response.json()}
+        return response.json()
     except requests.exceptions.RequestException as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch data from external API: {str(e)}")
 
