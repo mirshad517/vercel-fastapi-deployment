@@ -100,36 +100,36 @@ def vehicleinfotokens():
     data = [{"mirshadkvr19":"4c611e7488mshadd6a1b53609893p132b90jsn7af42493986c"},{"spartck":"2ad016f13fmsh8581f9352e2defcp1535c6jsn279380adfedf"},{"mirshad":"c054ac9b60mshd55e8424cbb5ad2p137e8djsn1e1c963c6a6f"}]
     return  {"status":"200","data":data}
 
-@app.get("/api/v1/football/matches",tags=['Football'])
-async def get_football_live_stream():
-    url = "https://football-live-stream-api.p.rapidapi.com/index.php"
+# @app.get("/api/v1/football/matches",tags=['Football'])
+# async def get_football_live_stream():
+#     url = "https://football-live-stream-api.p.rapidapi.com/index.php"
 
-    headers = {
-        "X-RapidAPI-Key": "4c611e7488mshadd6a1b53609893p132b90jsn7af42493986c",
-        "X-RapidAPI-Host": "football-live-stream-api.p.rapidapi.com"
-    }
+#     headers = {
+#         "X-RapidAPI-Key": "4c611e7488mshadd6a1b53609893p132b90jsn7af42493986c",
+#         "X-RapidAPI-Host": "football-live-stream-api.p.rapidapi.com"
+#     }
 
-    try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
-        return response.json()
-    except requests.exceptions.RequestException as e:
-        raise HTTPException(status_code=500, detail=f"Failed to fetch data from external API: {str(e)}")
+#     try:
+#         response = requests.get(url, headers=headers)
+#         response.raise_for_status()  # Raise an exception for 4xx or 5xx status codes
+#         return response.json()
+#     except requests.exceptions.RequestException as e:
+#         raise HTTPException(status_code=500, detail=f"Failed to fetch data from external API: {str(e)}")
 
-@app.get("/api/v1/football/stream",tags=['Football'])
-async def get_football_stream(id:str):
-    url = "https://football-live-stream-api.p.rapidapi.com/stream.php"
-    querystring = {"matchid": id}
-    headers = {
-        "X-RapidAPI-Key": "4c611e7488mshadd6a1b53609893p132b90jsn7af42493986c",
-        "X-RapidAPI-Host": "football-live-stream-api.p.rapidapi.com"
-    }
-    try:
-        response = requests.get(url, headers=headers, params=querystring)
-        response.raise_for_status()  # Raises an exception for 4xx or 5xx status codes
-        return response.json()
-    except requests.RequestException as e:
-        raise HTTPException(status_code=500, detail=f"Failed to fetch football stream: {e}")
+# @app.get("/api/v1/football/stream",tags=['Football'])
+# async def get_football_stream(id:str):
+#     url = "https://football-live-stream-api.p.rapidapi.com/stream.php"
+#     querystring = {"matchid": id}
+#     headers = {
+#         "X-RapidAPI-Key": "4c611e7488mshadd6a1b53609893p132b90jsn7af42493986c",
+#         "X-RapidAPI-Host": "football-live-stream-api.p.rapidapi.com"
+#     }
+#     try:
+#         response = requests.get(url, headers=headers, params=querystring)
+#         response.raise_for_status()  # Raises an exception for 4xx or 5xx status codes
+#         return response.json()
+#     except requests.RequestException as e:
+#         raise HTTPException(status_code=500, detail=f"Failed to fetch football stream: {e}")
 
 
 
