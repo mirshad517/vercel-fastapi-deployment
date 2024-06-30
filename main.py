@@ -265,3 +265,27 @@ async def get_whatsapp_data(phone_number: str):
         return response.json()
     else:
         raise HTTPException(status_code=response.status_code, detail="Failed to fetch WhatsApp data")
+
+
+
+@app.get("/fetch-chatgpt-response")
+def fetch_chatgpt_response():
+    url = "https://api.safone.dev/chatgpt"
+    headers = {
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "message": "hello",
+        "version": 3,
+        "chat_mode": "assistant",
+        "dialog_messages": "[{\"bot\":\"\",\"user\":\"\"}]"
+    }
+
+    response = requests.post(url, json=payload, headers=headers)
+    response_data = response.json()
+    
+    # Extract the message content from the response
+    message_content = response_data.get("choices", [])[0].get("message", {}).get("content", "")
+    
+    # Return the message content
+    return {"message": message_content}
