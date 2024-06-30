@@ -269,13 +269,13 @@ async def get_whatsapp_data(phone_number: str):
 
 
 @app.post("/api/v1/gpt_3",tags=["Chatgpt"])
-def fetch_chatgpt_response(link:str):
+async def fetch_chatgpt_response(message:str):
     url = "https://api.safone.dev/chatgpt"
     headers = {
         "Content-Type": "application/json"
     }
     payload = {
-        "message": link,
+        "message": message,
         "version": 3,
         "chat_mode": "assistant",
         "dialog_messages": "[{\"bot\":\"\",\"user\":\"\"}]"
