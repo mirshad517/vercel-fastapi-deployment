@@ -220,7 +220,7 @@ async def get_whatsapp_data(phone_number: str):
     else:
         raise HTTPException(status_code=response.status_code, detail="Failed to fetch WhatsApp data")
 
-@app.post("/api/v1/gpt_3", tags=["ChatGPT"])
+@app.post("/api/v1/gpt_3", tags=["ChatGPT-Ai"])
 async def fetch_chatgpt_response(message: str):
     url = "https://api.safone.dev/chatgpt"
     headers = {
