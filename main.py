@@ -241,3 +241,22 @@ async def fetch_chatgpt_response(message: str):
     
     # Return the message content
     return {"message": message_content}
+
+
+@app.post("/api/v1/code-gen", tags=["Code Generation"])
+async def generate_code(query: str):
+    url = "https://estatic-node-api.onrender.com/tool-sphere/api/code-gen"
+    payload = json.dumps({
+        "query": query
+    })
+    headers = {
+        'Content-Type': 'application/json'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+    print(response.text)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise HTTPException(status_code=response.status_code, detail="Failed to generate code")
