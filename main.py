@@ -220,43 +220,44 @@ async def get_whatsapp_data(phone_number: str):
     else:
         raise HTTPException(status_code=response.status_code, detail="Failed to fetch WhatsApp data")
 
-@app.post("/api/v1/gpt_3", tags=["ChatGPT-Ai"])
+@app.post("/api/v1/gpt_3", tags=["ChatGPT-Ai - 3"])
 async def fetch_chatgpt_response(message: str):
-    url = "https://api.safone.dev/chatgpt"
-    headers = {
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "message": message,
-        "version": 3,
-        "chat_mode": "assistant",
-        "dialog_messages": "[{\"bot\":\"\",\"user\":\"\"}]"
-    }
+  url = "https://api.safone.dev/chatgpt"
+  headers = {
+      "Content-Type": "application/json"
+  }
+  payload = {
+      "message": message,
+      "version": 3,
+      "chat_mode": "assistant",
+      "dialog_messages": "[{\"bot\":\"\",\"user\":\"\"}]"
+  }
 
-    response = requests.post(url, json=payload, headers=headers)
-    response_data = response.json()
-    
-    # Extract the message content from the response
-    message_content = response_data.get("choices", [])[0].get("message", {}).get("content", "")
-    
-    # Return the message content
-    return {"message": message_content}
+  response = requests.post(url, json=payload, headers=headers)
+  response_data = response.json()
+
+  # Extract the message content from the response
+  message_content = response_data.get("choices", [])[0].get("message", {}).get("content", "")
+
+  # Return the message content
+  return {"message": message_content}
 
 
 @app.post("/api/v1/code-gen", tags=["Code Generation"])
 async def generate_code(query: str):
-    url = "https://estatic-node-api.onrender.com/tool-sphere/api/code-gen"
-    payload = json.dumps({
-        "query": query
-    })
-    headers = {
-        'Content-Type': 'application/json'
-    }
+  url = "https://estatic-node-api.onrender.com/tool-sphere/api/code-gen"
+  payload = json.dumps({
+      "query": query
+  })
+  headers = {
+      'Content-Type': 'application/json'
+  }
 
-    response = requests.request("POST", url, headers=headers, data=payload)
-    print(response.text)
+  response = requests.request("POST", url, headers=headers, data=payload)
 
-    if response.status_code == 200:
-        return response.json()
-    else:
-        raise HTTPException(status_code=response.status_code, detail="Failed to generate code")
+  if response.status_code == 200:   
+
+      return response.json()
+  else:
+      raise HTTPException(status_code=response.status_code, detail="Failed   
+ to generate code")
