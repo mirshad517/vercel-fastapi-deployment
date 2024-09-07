@@ -243,21 +243,21 @@ async def get_whatsapp_data(phone_number: str):
 #   return {"message": message_content}
 
 
-# @app.post("/api/v1/code-gen", tags=["Code Generation"])
-# async def generate_code(query: str):
-#   url = "https://estatic-node-api.onrender.com/tool-sphere/api/code-gen"
-#   payload = json.dumps({
-#       "query": query
-#   })
-#   headers = {
-#       'Content-Type': 'application/json'
-#   }
+@app.post("/api/v1/code-gen", tags=["Code Generation"])
+async def generate_code(query: str):
+  url = "https://estatic-node-api.onrender.com/tool-sphere/api/code-gen"
+  payload = json.dumps({
+      "query": query
+  })
+  headers = {
+      'Content-Type': 'application/json'
+  }
 
-#   response = requests.request("POST", url, headers=headers, data=payload)
+  response = requests.request("POST", url, headers=headers, data=payload)
 
-#   if response.status_code == 200:   
+  if response.status_code == 200:   
 
-#       return response.json()
-#   else:
-#       raise HTTPException(status_code=response.status_code, detail="Failed   
-#  to generate code")
+      return response.json()
+  else:
+      raise HTTPException(status_code=response.status_code, detail="Failed   
+ to generate code")
